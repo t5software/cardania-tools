@@ -37,7 +37,12 @@
 
 			try {
 				let networkId = await Nami.getNetworkId();
-				network = networkId === 1 ? 'mainnet' : 'testnet';
+				if (networkId === 1) {
+					network = 'mainnet';
+				} else {
+					network = 'testnet';
+					return;
+				}
 			} catch (err) {
 				console.error(err);
 				error = 'Unable to get network from Nami';
