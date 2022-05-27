@@ -19,6 +19,11 @@ test('search page has expected h1', async ({ page }) => {
 	expect(await page.textContent('h1')).toBe('Search');
 });
 
+test('dashboard page has expected h1', async ({ page }) => {
+	await page.goto(baseUrl + '/dashboard');
+	expect(await page.textContent('h1')).toBe('Dashboard');
+});
+
 test('search address with some resources press enter expect missing summary', async ({ page }) => {
 	await page.goto(baseUrl + '/search');
 	await page.fill(

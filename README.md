@@ -4,6 +4,12 @@ Enter an ADA address and see what Cardania Resources are missing.
 
 See demo [here](https://t5software.github.io/cardania-tools-prod/)
 
+Support this project by donating to this Cardano address
+
+```
+addr1qy047pejncekqrqm8qu33hx3sjzpv4vh4lal3ud906qnn44a6vchc2wrqstx29vnzfe58swdae7jczh2hj6kam3nf5zs5gfhan
+```
+
 ## Setup
 
 Using node v16
