@@ -1,6 +1,8 @@
 <script>
 	import { base } from '$app/paths';
+	import { fly } from 'svelte/transition';
 	export let assets;
+	export let delay;
 
 	const name = assets[0]?.cardania;
 	const image = assets[0]?.image;
@@ -13,7 +15,7 @@
 	}
 </script>
 
-<div class="card">
+<div in:fly={{ x: -200, duration: 2000, delay: delay }} class="card">
 	<img src={base + '/assets/' + image} alt={name} />
 	<div class="container">
 		<h1>{quantity}</h1>

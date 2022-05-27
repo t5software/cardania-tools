@@ -2,6 +2,7 @@
 	import '../../app.css';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { fade } from 'svelte/transition';
 
 	import Card from '$lib/Card.svelte';
 
@@ -16,6 +17,7 @@
 	let address = '';
 	let error = '';
 	let isNamiEnabled = false;
+	let loading = false;
 
 	onMount(async () => {
 		document.getElementsByTagName('body')[0].style.overflow = 'auto';
@@ -29,6 +31,7 @@
 	});
 
 	async function connectWallet() {
+		loading = true;
 		let Cardano = window.cardano;
 		// let Nami = Cardano.nami;
 		try {
@@ -37,7 +40,12 @@
 
 			try {
 				let networkId = await Nami.getNetworkId();
-				network = networkId === 1 ? 'mainnet' : 'testnet';
+				if (networkId === 1) {
+					network = 'mainnet';
+				} else {
+					network = 'testnet';
+					return;
+				}
 			} catch (err) {
 				console.error(err);
 				error = 'Unable to get network from Nami';
@@ -56,6 +64,8 @@
 			console.error(err);
 			error = 'Unable to enable Nami';
 		}
+
+		loading = false;
 	}
 </script>
 
@@ -65,13 +75,13 @@
 </svelte:head>
 
 {#if allAssets.length > 0}
-	<div class="cards">
-		{#each distinctAssetTypes as asset}
-			<Card assets={allAssets.filter((a) => a.cardania === asset)} />
+	<div in:fade class="cards">
+		{#each distinctAssetTypes as asset, index}
+			<Card delay={(index + 1) * 1000} assets={allAssets.filter((a) => a.cardania === asset)} />
 		{/each}
 	</div>
 {:else if !isNamiEnabled}
-	<div class="content">
+	<div in:fade class="content">
 		<h1>Dashboard</h1>
 		<h2>See all your Cardania assets in one place</h2>
 
@@ -84,8 +94,16 @@
 		</p>
 	</div>
 {:else if network !== 'mainnet'}
-	<div class="content">
+	<div in:fade class="content">
 		<h2>Switch your wallet to mainnet and refresh this page.</h2>
+	</div>
+{:else if loading}
+	<div in:fade class="content">
+		<h2>Loading...</h2>
+	</div>
+{:else}
+	<div in:fade class="content">
+		<h2>No Cardania assets found in your wallet!</h2>
 	</div>
 {/if}
 
