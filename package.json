@@ -29,6 +29,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@fontsource/fira-mono": "^4.5.8"
+		"@fontsource/fira-mono": "^4.5.8",
+		"bech32": "^2.0.0",
+		"buffer": "^6.0.3"
 	}
 }
