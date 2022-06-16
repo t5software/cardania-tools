@@ -33,10 +33,7 @@ test('search address with some resources press enter expect missing summary', as
 
 	await page.keyboard.press('Enter');
 
-	expect((await page.$$('.results tr')).length === 40);
-	expect((await page.$$('.green-check')).length === 26);
-	expect((await page.$$('.red-ex')).length === 14);
-	expect(await page.textContent('#summary')).toBe('Missing 14 Cardania Resources!');
+	expect(await page.textContent('#summary')).toBe('Missing 13 Cardania Resources!');
 });
 
 test('search blank address click search expect error', async ({ page }) => {
