@@ -87,11 +87,7 @@
 
 		<button on:click={connectWallet}>Connect Wallet</button>
 
-		<p>
-			*This is still a work in progress. Nami wallet only. See my progress on GitHub <a
-				href="https://github.com/t5software/cardania-tools/milestone/2">here</a
-			>.
-		</p>
+		<p>*Nami wallet only.</p>
 	</div>
 {:else if network !== 'mainnet'}
 	<div in:fade class="content">
